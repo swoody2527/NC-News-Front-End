@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import '../styles/ArticleCard.css'
 function ArticleCard({ article }) {
     article.created_at = new Date(article.created_at)
@@ -10,7 +11,7 @@ function ArticleCard({ article }) {
         <p>Written by {article.author} on {formattedDate}</p>
         <p>Related to {article.topic}</p>
         <p>{article.comment_count} comments</p>
-        <button>View Article</button>
+        <Link to={`/articles/${article.article_id}`}><button>View Article</button></Link>
     </section>
   )
 }
