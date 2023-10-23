@@ -1,0 +1,12 @@
+.article-card {
+    border: 3px solid black;
+    margin: 2px;
+    text-align: center;
+    height: 300px;
+    width: 300px;
+}
+
+.article-card > button {
+    background-color: rgb(157, 211, 157);
+    margin: 5px;
+}

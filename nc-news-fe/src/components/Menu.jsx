@@ -1,12 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Menu() {
   return (
     <section>
         <h3>Welcome to NC News</h3>
-        <button>View Articles</button>
+        <Link to="/articles"><button>View Articles</button></Link>
         <button>Post New Article</button>
-        <Link to="/articles"><button>Login</button></Link>
+        <button>Login</button>
         <button>Logout</button>
     </section>
   )
