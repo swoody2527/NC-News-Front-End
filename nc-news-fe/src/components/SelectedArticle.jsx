@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import '../styles/SelectedArticle.css'
+import CommentSection from "./CommentSection";
 
 function SelectedArticle() {
   const [article, setArticle] = useState([]);
@@ -20,8 +21,8 @@ function SelectedArticle() {
         <img src={article.article_img_url}></img>
         <p>{article.body}</p>
         <p>{article.votes} votes</p>
-        <p>{article.comment_count} comments</p>
         <Link to="/articles"><button>Back To Articles</button></Link>
+        <CommentSection article_id={article_id} comment_count={article.comment_count}/>
     </section>
   );
 }
