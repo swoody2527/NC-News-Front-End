@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css'
 import Menu from './components/Menu'
 import Articles from './components/Articles';
+import SelectedArticle from './components/SelectedArticle';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Menu />}></Route>
       <Route path="/articles" element={<Articles />}></Route>
+      <Route path="/articles/:article_id" element={<SelectedArticle/>} />
     </Routes>
     </main>
   )
