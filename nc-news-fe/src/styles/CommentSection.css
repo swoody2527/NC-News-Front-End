@@ -1,6 +1,11 @@
 .comment {
     background-color: aliceblue;
-    margin: 2px;
+    margin: 5px;
     border-radius: 5px;
     padding: 5px;
 }
+
+#comment-body {
+    height: 50px;
+    width: 375px;
+}   
