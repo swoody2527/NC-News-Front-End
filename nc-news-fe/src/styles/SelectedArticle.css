@@ -13,3 +13,43 @@
 .article-body {
     padding: 10px;
 }
+
+.voting-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.voting-buttons button {
+  margin: 5px;
+
+}
+
+.upvote-btn {
+    background-color: rgb(120, 183, 120);
+
+}
+
+.downvote-btn {
+    background-color: rgb(187, 88, 88);
+}
+
+.upvote-btn[disabled], .downvote-btn[disabled] {
+    background-color: #ccc; 
+    cursor: not-allowed;
+  }
+
+.back-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-btn button {
+    background-color: rgb(171, 171, 173);
+}
+
+.votes-counter {
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+}
