@@ -5,6 +5,9 @@ function CommentSection({ article_id, comment_count }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [newCommentCount, setNewCommentCount] = useState(0)
+  const [isCommentPosted, setIsCommentPosted] = useState(false)
+  const [isPosting, setIsPosting] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     axios
@@ -17,20 +20,29 @@ function CommentSection({ article_id, comment_count }) {
 
   const handleNewComment = (e) => {
     e.preventDefault()
+    setIsPosting(true)
     axios.post(`https://be-nc-news-sopv.onrender.com/api/articles/${article_id}/comments`, {
       username: "grumpy19",
       body: newComment,
     })
     .then((response) => {
+      setNewComment("")
+      setIsCommentPosted(true)
+      setIsPosting(false)
       setNewCommentCount(newCommentCount + 1)
       setComments([...comments, response.data.postedComment])
-      setNewComment("")
+    })
+    .catch((err) => {
+      setError("Error posting comment, please try again")
+      setIsPosting(false)
     })
   };
 
   return (
     <section className="comments-section">
       <h3>{comment_count} Comments</h3>
+      {isCommentPosted ? <h4>Comment Posted!</h4> : null}
+      {error ? <h4 className="post-error">{error}</h4> : null}
       <form onSubmit={handleNewComment}>
         <label htmlFor="comment-body">Comment:</label>
         <textarea
@@ -39,8 +51,11 @@ function CommentSection({ article_id, comment_count }) {
           type="text"
           placeholder="Add a comment..."
           value={newComment}
-          onChange={(e) => {setNewComment(e.target.value)}}></textarea>
-        <button type="submit">Post</button>
+          onChange={(e) => {
+            setIsCommentPosted(false)
+            setNewComment(e.target.value)
+            }}></textarea>
+        <button type="submit" disabled={!newComment.trim() || isPosting}>{isPosting? "Posting..." : "Post"}</button>
       </form>
       {comments.map((comment) => {
         comment.created_at = new Date(comment.created_at);

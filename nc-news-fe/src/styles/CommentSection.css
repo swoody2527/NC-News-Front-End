@@ -8,4 +8,13 @@
 #comment-body {
     height: 50px;
     width: 375px;
-}   
+}
+
+h4 {
+    text-align: center;
+    color: green;
+}
+
+.post-error {
+    color: rgb(164, 67, 67);
+}
