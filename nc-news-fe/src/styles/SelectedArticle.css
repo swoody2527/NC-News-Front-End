@@ -7,4 +7,5 @@
 .selected-article > img {
     max-width: 100%;
     max-height: 300px;
+    box-shadow: 5px 10px 20px 4px #888888;
 }
