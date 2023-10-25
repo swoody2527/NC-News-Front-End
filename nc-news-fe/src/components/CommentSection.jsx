@@ -41,8 +41,8 @@ function CommentSection({ article_id, comment_count }) {
   return (
     <section className="comments-section">
       <h3>{comment_count} Comments</h3>
-      {isCommentPosted ? <h4>Comment Posted!</h4> : null}
-      {error ? <h4 className="post-error">{error}</h4> : null}
+      {isCommentPosted ? <h4 className="post-success-msg">Comment Posted!</h4> : null}
+      {error ? <h4 className="post-error-msg">{error}</h4> : null}
       <form onSubmit={handleNewComment}>
         <label htmlFor="comment-body">Comment:</label>
         <textarea

@@ -53,3 +53,7 @@
     justify-content: center;
     font-weight: bolder;
 }
+
+.voting-msg, .patch-error-msg {
+    text-align: center;
+}

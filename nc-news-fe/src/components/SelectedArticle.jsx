@@ -14,6 +14,7 @@ function SelectedArticle() {
   const [hasUpvoted, setHasUpvoted] = useState(false);
   const [hasDownVoted, setHasDownvoted] = useState(false);
   const [patchError, setPatchError] = useState(null);
+  const [isVotePatching, setIsVotePatching] = useState(false);
 
   useEffect(() => {
     axios
@@ -33,48 +34,60 @@ function SelectedArticle() {
   }, [article]);
 
   const handleUpvote = () => {
+    const votesPatchObject = {inc_votes: 1}
+    setIsVotePatching(true);
     setVotes(votes + 1);
-    setHasUpvoted(true);
-    setHasDownvoted(false);
+    if (hasDownVoted) {
+      setVotes(votes + 2)
+      votesPatchObject.inc_votes = 2
+
+    } 
     axios
       .patch(
-        `https://be-nc-news-sopv.onrender.com/api/articles/${article_id}`,
-        {
-          inc_votes: 1,
-        }
+        `https://be-nc-news-sopv.onrender.com/api/articles/${article_id}`, votesPatchObject
       )
       .then(() => {
         setPatchError(null);
         setHasUpvoted(true);
         setHasDownvoted(false);
+        setIsVotePatching(false);
       })
       .catch((err) => {
         console.log(err);
+        setVotes(article.votes)
         setHasUpvoted(false);
-        setPatchError("Error processing vote, please try again");
+        setIsVotePatching(false);
+        setPatchError("Error processing vote, please refresh and try again");
       });
   };
 
   const handleDownvote = () => {
+    const votesPatchObject = {inc_votes: -1}
+    setIsVotePatching(true);
     setVotes(votes - 1);
+    if (hasUpvoted) {
+      setVotes(votes - 2)
+      votesPatchObject.inc_votes = -2
+    } 
     axios
       .patch(
-        `https://be-nc-news-sopv.onrender.com/api/articles/${article_id}`,
-        {
-          inc_votes: -1,
-        }
+        `https://be-nc-news-sopv.onrender.com/api/articles/${article_id}`, votesPatchObject
       )
       .then(() => {
         setPatchError(null);
         setHasDownvoted(true);
         setHasUpvoted(false);
+        setIsVotePatching(false);
       })
       .catch((err) => {
         console.log(err);
+        setVotes(article.votes)
         setHasDownvoted(false);
-        setPatchError("Error processing vote, please try again");
+        setIsVotePatching(false);
+        setPatchError("Error processing vote, please refresh and try again");
       });
   };
+
 
   if (isLoading) {
     return <p>Loading Article...</p>;
@@ -91,23 +104,28 @@ function SelectedArticle() {
       <img src={article.article_img_url}></img>
       <p className="article-body">{article.body}</p>
       <div className="votes-counter">
-      <p>{votes} votes</p>
+        <p>{votes} votes</p>
       </div>
-      <div className="voting-buttons">
-        <button
-          className="upvote-btn"
-          onClick={handleUpvote}
-          disabled={hasUpvoted}>
-          Upvote
-        </button>
-        <button
-          className="downvote-btn"
-          onClick={handleDownvote}
-          disabled={hasDownVoted}>
-          Downvote
-        </button>
-        {patchError ? <p>{patchError}</p> : null}
-      </div>
+      {isVotePatching ? (
+        <p className="voting-msg">Voting...</p>
+      ) : patchError ? (
+        <p className="patch-error-msg">{patchError}</p>
+      ) : (
+        <div className="voting-buttons">
+          <button
+            className="upvote-btn"
+            onClick={handleUpvote}
+            disabled={hasUpvoted}>
+            Upvote
+          </button>
+          <button
+            className="downvote-btn"
+            onClick={handleDownvote}
+            disabled={hasDownVoted}>
+            Downvote
+          </button>
+        </div>
+      )}
       <div className="back-btn">
         <Link to="/articles">
           <button>Back To Articles</button>
