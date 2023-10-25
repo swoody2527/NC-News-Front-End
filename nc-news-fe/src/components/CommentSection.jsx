@@ -26,6 +26,7 @@ function CommentSection({ article_id, comment_count }) {
       body: newComment,
     })
     .then((response) => {
+      setError(null)
       setNewComment("")
       setIsCommentPosted(true)
       setIsPosting(false)
