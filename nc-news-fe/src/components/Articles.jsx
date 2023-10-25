@@ -3,6 +3,8 @@ import axios from "axios";
 import ArticleCard from "./ArticleCard";
 import TopicFilter from "./TopicFilter";
 import '../styles/Articles.css'
+
+
 import { useSearchParams } from "react-router-dom";
 
 function Articles() {
@@ -24,9 +26,7 @@ function Articles() {
 
   return (
     <section>
-      <div className="topic-filter-form">
       <TopicFilter />
-      </div>
       <div className="articles-container">
         {articleList.map((article) => {
             return (

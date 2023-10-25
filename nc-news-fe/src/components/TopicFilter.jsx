@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../styles/TopicFilter.css"
 
 function TopicFilter() {
   const [topics, setTopics] = useState([]);
@@ -20,6 +21,7 @@ function TopicFilter() {
   };
 
   return (
+    <div className="topic-filter-form">
     <form onSubmit={handleSubmit}>
       <select
         name="topic"
@@ -42,6 +44,7 @@ function TopicFilter() {
         <button type="submit">Search</button>
       </Link>
     </form>
+    </div>
   );
 }
 
