@@ -1,6 +1,20 @@
 .comment {
     background-color: aliceblue;
-    margin: 2px;
+    margin: 5px;
     border-radius: 5px;
     padding: 5px;
+}
+
+#comment-body {
+    height: 50px;
+    width: 375px;
+}
+
+h4 {
+    text-align: center;
+    color: green;
+}
+
+.post-error {
+    color: rgb(164, 67, 67);
 }
