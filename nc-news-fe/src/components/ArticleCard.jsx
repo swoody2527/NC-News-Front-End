@@ -10,6 +10,7 @@ function ArticleCard({ article }) {
         <h4>{article.title}</h4>
         <p>Written by {article.author} on {formattedDate}</p>
         <p>Related to {article.topic}</p>
+        <p>{article.votes} votes</p>
         <p>{article.comment_count} comments</p>
         <Link to={`/articles/${article.article_id}`}><button>View Article</button></Link>
     </section>
