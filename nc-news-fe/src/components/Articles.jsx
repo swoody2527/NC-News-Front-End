@@ -33,6 +33,7 @@ function Articles() {
     <section>
       <TopicFilter />
       <SortingFilter topic={topicQuery}/>
+      {!topicQuery ? <h3>Viewing all articles</h3> : <h3>Viewing {topicQuery} articles</h3>}
       <div className="articles-container">
         {articleList.map((article) => {
             return (
