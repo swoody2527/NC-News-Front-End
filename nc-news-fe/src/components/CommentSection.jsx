@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/CommentSection.css";
+import { UserContext } from "../contexts/UserContext";
 function CommentSection({ article_id, comment_count }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
@@ -8,6 +9,7 @@ function CommentSection({ article_id, comment_count }) {
   const [isCommentPosted, setIsCommentPosted] = useState(false)
   const [isPosting, setIsPosting] = useState(false)
   const [error, setError] = useState(null)
+  const {user} = useContext(UserContext)
 
   useEffect(() => {
     axios
@@ -22,7 +24,7 @@ function CommentSection({ article_id, comment_count }) {
     e.preventDefault()
     setIsPosting(true)
     axios.post(`https://be-nc-news-sopv.onrender.com/api/articles/${article_id}/comments`, {
-      username: "grumpy19",
+      username: user.username,
       body: newComment,
     })
     .then((response) => {
