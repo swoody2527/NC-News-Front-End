@@ -36,8 +36,9 @@ function SortingFilter({ topic }) {
       <select
         name="sort-category"
         id="sort-category"
-        onChange={handleSortByChange}>
-        <option selected value="created_at">Date </option>
+        onChange={handleSortByChange}
+        defaultValue={"created_at"}>
+        <option value="created_at">Date </option>
         <option value="comment_count">Comment Count </option>
         <option value="votes">Votes </option>
       </select>
