@@ -1,4 +1,8 @@
 .comment {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    
     background-color: aliceblue;
     margin: 5px;
     border-radius: 5px;
@@ -17,4 +21,18 @@
 
 .post-error-msg {
     color: rgb(164, 67, 67);
+}
+
+.delete-success-msg {
+    text-align: center;
+    color: red;
+}
+
+.delete-comment-btn {
+    background-color: rgb(206, 115, 115);
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+
 }
